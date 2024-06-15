@@ -7,3 +7,11 @@ export function debounce(fn: Function, n = 100) {
     }, n)
   }
 }
+
+export function formatError(error: any) {
+  try {
+    return error?.stack || `${error.name}: ${error?.message}` || error
+  } catch (e) {
+    return error?.stack || error?.message || error
+  }
+}

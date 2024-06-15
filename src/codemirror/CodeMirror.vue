@@ -4,24 +4,15 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { basicSetup } from 'codemirror'
 import { EditorState } from '@codemirror/state'
-import { EditorView, keymap } from '@codemirror/view'
-import { javascript } from '@codemirror/lang-javascript'
-import { defaultKeymap, history, historyKeymap } from '@codemirror/commands'
-import { dracula } from 'thememirror'
+import { EditorView, baseExtensions } from './codemirror'
 
 const emit = defineEmits(['update'])
 const value = defineModel<string>()
 
 const el = ref()
 const extensions = [
-  basicSetup,
-  javascript(),
-  history(),
-  dracula,
-  // syntaxHighlighting(defaultHighlightStyle),
-  keymap.of([defaultKeymap, historyKeymap]),
+  baseExtensions,
   EditorView.updateListener.of(viewUpdate => {
     // https://discuss.codemirror.net/t/codemirror-6-proper-way-to-listen-for-changes/2395/11
     // onUpdate(viewUpdate)
@@ -46,6 +37,5 @@ onMounted(() => {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  border: 1px solid black;
 }
 </style>
