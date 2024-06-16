@@ -4,5 +4,5 @@ const value = defineModel<string>()
 </script>
 
 <template>
-  <CodeMirror v-model="value" />
+  <CodeMirror class="h-full" v-model="value" />
 </template>

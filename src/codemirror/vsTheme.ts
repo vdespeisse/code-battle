@@ -6,7 +6,8 @@ import { tags } from '@lezer/highlight'
 // Using https://github.com/PrismJS/prism-themes/blob/master/themes/prism-vsc-dark-plus.css as reference for the colors
 
 const foreground = '#9cdcfe',
-  background = '#1e1e1e',
+  // background = '#1e1e1e',
+  background = 'rgb(40, 40, 40)',
   darkBackground = '#000000',
   highlightBackground = '#ffffff0f',
   cursor = '#c6c6c6',
@@ -60,7 +61,7 @@ export const vsCodeDarkPlusTheme = EditorView.theme(
     '.cm-selectionMatch': { backgroundColor: '#aafe661a' },
 
     '&.cm-editor': {
-      borderRadius: '5px',
+      borderRadius: '0.25rem',
     },
 
     '&.cm-editor .cm-scroller': {

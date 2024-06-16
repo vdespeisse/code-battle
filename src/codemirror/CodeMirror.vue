@@ -38,4 +38,11 @@ onMounted(() => {
   width: 100%;
   overflow: hidden;
 }
+.editor .cm-editor {
+  height: 100%;
+  @apply border-2 border-layer-1;
+}
+.editor .cm-focused {
+  @apply border-green-600;
+}
 </style>

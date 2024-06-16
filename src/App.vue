@@ -22,13 +22,9 @@ async function test() {
 </script>
 
 <template>
-  <div>dsqdsq {{ result }} {{ code }}</div>
-  <div>
-    Error:
-    <pre>{{ errorMessage }}</pre>
-  </div>
-  <button @click="test">Click</button>
-  <CodeEditor mode="js" filename="test" v-model="code" />
+  <button @click="$router.push('/login')">LOGIN</button>
+  <div>{{ $route.fullPath }}</div>
+  <RouterView />
 </template>
 
 <style scoped></style>
