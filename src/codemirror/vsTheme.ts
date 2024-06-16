@@ -43,7 +43,9 @@ export const vsCodeDarkPlusTheme = EditorView.theme(
     },
 
     '.cm-cursor, .cm-dropCursor': { borderLeftColor: cursor },
-    '&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection': { backgroundColor: selection },
+    '&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection': {
+      backgroundColor: selection,
+    },
 
     '.cm-panels': { backgroundColor: darkBackground, color: foreground },
     '.cm-panels.cm-panels-top': { borderBottom: '2px solid black' },
@@ -58,8 +60,9 @@ export const vsCodeDarkPlusTheme = EditorView.theme(
     },
 
     '.cm-activeLine': { backgroundColor: highlightBackground },
-    '.cm-selectionMatch': { backgroundColor: '#aafe661a' },
 
+    '.cm-selectionMatch': { backgroundColor: '#aafe661a' },
+    '.cm-selectionMatch-main': { backgroundColor: 'red' },
     '&.cm-editor': {
       borderRadius: '0.25rem',
     },

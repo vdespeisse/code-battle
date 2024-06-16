@@ -1,17 +1,18 @@
-export function runTests(solution: any, testCases: TestCase[]): boolean {
-  // let passed = 0
+import { TestCase } from '../types'
+export function runTests(solution: Function, testCases: TestCase[]) {
+  let passed = 0
   for (const { input, output } of testCases) {
-    if (solution(input) !== output) {
-      return false
+    if (solution(input) === output) {
+      passed += 1
     }
   }
-  return true
+  return { passed, total: testCases.length }
 }
 
-export async function runFunction(fnDefintion: string, args: any[]) {
-  const blob = new Blob([fnDefintion], { type: 'application/javascript' })
+export async function parseFunction(fnDefinition: string) {
+  const blob = new Blob([fnDefinition], { type: 'application/javascript' })
   const url = URL.createObjectURL(blob)
   const module = await import(url)
   URL.revokeObjectURL(url)
-  return module.default(...args)
+  return module.default
 }

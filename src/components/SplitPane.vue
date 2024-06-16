@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { type MaybeRefOrGetter, computed, inject, reactive, ref, toValue } from 'vue'
+import { computed, reactive, ref } from 'vue'
 // import { injectKeyStore } from './types'
 
-const props = defineProps<{ layout?: 'horizontal' | 'vertical' }>()
+const props = defineProps<{ layout?: 'horizontal' | 'vertical'; startRatio?: number }>()
 const isVertical = computed(() => props.layout === 'vertical')
 
 const container = ref()
 
 const state = reactive({
   dragging: false,
-  split: 50,
+  split: props.startRatio || 50,
   viewHeight: 0,
   viewWidth: 0,
 })

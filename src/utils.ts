@@ -8,9 +8,21 @@ export function debounce(fn: Function, n = 100) {
   }
 }
 
+function formatStack(stack: string) {
+  try {
+    const blobUrl = `blob:${window.location.origin}/`
+    return stack
+      .split('\n')
+      .slice(0, -2)
+      .map(d => d.replace(blobUrl, ''))
+      .join('<br>')
+  } catch (e) {
+    return stack
+  }
+}
 export function formatError(error: any) {
   try {
-    return error?.stack || `${error.name}: ${error?.message}` || error
+    return formatStack(error?.stack) || `${error.name}: ${error?.message}` || error
   } catch (e) {
     return error?.stack || error?.message || error
   }

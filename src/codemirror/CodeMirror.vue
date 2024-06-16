@@ -45,4 +45,7 @@ onMounted(() => {
 .editor .cm-focused {
   @apply border-green-600;
 }
+.editor .cm-editor .cm-selectionBackground {
+  background: #094771 !important;
+}
 </style>

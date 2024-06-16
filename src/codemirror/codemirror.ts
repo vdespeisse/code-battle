@@ -69,7 +69,7 @@ export const baseExtensions: Extension = (() => [
   bracketMatching(),
   closeBrackets(),
   autocompletion(),
-  rectangularSelection(),
+  // rectangularSelection(),
   crosshairCursor(),
   // highlightActiveLine(),
   drawSelection(),

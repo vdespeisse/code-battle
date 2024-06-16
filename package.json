@@ -14,11 +14,16 @@
     "@codemirror/language": "^6.10.2",
     "@codemirror/state": "^6.4.1",
     "@codemirror/view": "^6.28.1",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/vue-fontawesome": "^3.0.8",
     "codemirror": "^6.0.1",
+    "marked": "^13.0.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.3"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.13",
     "@vitejs/plugin-vue": "^5.0.4",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",

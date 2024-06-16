@@ -19,6 +19,7 @@ onMounted(() => {
     drops.push(0)
   }
   const str = '｡｢｣､･ｦｧｨｩｪｫｬｭｮｯABCDEF0123456789ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝﾞﾟ'
+  let count = 0
   function draw() {
     context.fillStyle = 'rgba(0,0,0,0.05)'
     context.fillRect(0, 0, W, H)
@@ -36,9 +37,13 @@ onMounted(() => {
       }
       drops[i]++
     }
+    if (count < 100) {
+      count++
+    }
+    setTimeout(draw, count * fontSize > H ? 55 : 20)
   }
   draw()
-  setInterval(draw, 60)
+  // setInterval(draw, 60)
 })
 </script>
 <template>
