@@ -16,7 +16,7 @@ const state = reactive({
 
 const boundSplit = computed(() => {
   const { split } = state
-  return split < 20 ? 20 : split > 80 ? 80 : split
+  return split < 5 ? 5 : split > 95 ? 95 : split
 })
 
 let startPosition = 0
@@ -80,6 +80,7 @@ function dragEnd() {
 .right {
   position: relative;
   height: 100%;
+  min-height: 38px;
 }
 .left {
   border-right: 1px solid var(--border);
@@ -93,6 +94,8 @@ function dragEnd() {
 .dragger:hover::after {
   @apply bg-green-600;
   height: 100%;
+  transition: all 0 ease;
+  transition-delay: 0.1s;
 }
 .dragger::after {
   @apply bg-layer-1;

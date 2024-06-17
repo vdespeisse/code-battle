@@ -34,17 +34,17 @@ onMounted(() => {
 <style>
 .editor {
   position: relative;
-  height: 100%;
+  height: calc(100% - 36px);
   width: 100%;
   overflow: hidden;
 }
 .editor .cm-editor {
   height: 100%;
-  @apply border-2 border-layer-1;
+  /* @apply border border-layer-1; */
 }
-.editor .cm-focused {
-  @apply border-green-600;
-}
+/* .editor .cm-focused {
+  @apply border-layer-1;
+} */
 .editor .cm-editor .cm-selectionBackground {
   background: #094771 !important;
 }

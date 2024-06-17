@@ -7,7 +7,9 @@ interface State {
   description: string
   tests: TestCase[]
   status: 'idle' | 'running' | 'pass' | 'fail' | 'parsing_error' | 'error'
+  bestScore: number
   terminal: string
+  activePanel: 'editor' | 'terminal' | 'description' | null
 }
 const state = reactive<State>({
   code: '',
@@ -15,6 +17,8 @@ const state = reactive<State>({
   tests: [],
   status: 'idle',
   terminal: '',
+  activePanel: null,
+  bestScore: 0,
 })
 const actions = {
   run: async () => {
@@ -27,6 +31,7 @@ const actions = {
     // }
 
     console.log('run', state.code)
+    state.terminal = 'Running tests...'
     let fn
     try {
       fn = await parseFunction(state.code)
@@ -36,13 +41,24 @@ const actions = {
       return
     }
     state.status = 'running'
+    const log = console.log
+    console.log = function (...args) {
+      // DO MESSAGE HERE.
+      state.terminal += '<br>LOG: ' + args.join(' ')
+      log(...args)
+    }
     try {
       const { passed, total } = runTests(fn, state.tests)
       state.status = passed === total ? 'pass' : 'fail'
-      state.terminal = `${passed}/${total} tests passed`
+      state.terminal += `<br>${passed}/${total} tests passed`
+      if (passed > state.bestScore) {
+        state.bestScore = passed
+      }
+      console.log = log
     } catch (e) {
-      state.terminal = formatError(e)
+      state.terminal += '<br>' + formatError(e)
       state.status = 'error'
+      console.log = log
     }
   },
 }

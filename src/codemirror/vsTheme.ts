@@ -63,9 +63,9 @@ export const vsCodeDarkPlusTheme = EditorView.theme(
 
     '.cm-selectionMatch': { backgroundColor: '#aafe661a' },
     '.cm-selectionMatch-main': { backgroundColor: 'red' },
-    '&.cm-editor': {
-      borderRadius: '0.25rem',
-    },
+    // '&.cm-editor': {
+    //   borderRadius: '0.25rem',
+    // },
 
     '&.cm-editor .cm-scroller': {
       fontFamily: 'Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace',

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { formatError } from '../utils'
 import useState from '../composables/state'
 import CodeEditor from '../codemirror/CodeEditor.vue'
 import SplitPane from '../components/SplitPane.vue'
+import Panel from '../components/Panel.vue'
 import Header from '../components/Header.vue'
 import MarkdownRenderer from '../components/MarkdownRenderer.vue'
-const { state } = useState()
+const { state, actions } = useState()
 const testFn = `export default function test(value) {
   console.log('test')
   return value + 1
@@ -35,22 +35,52 @@ state.tests = [
     Error:
     <pre>{{ errorMessage }}</pre>
   </div> -->
-  <Header></Header>
+  <Header @click="state.activePanel = null"></Header>
   <!-- <div>{{ state.code }}</div> -->
-  <SplitPane class="screen-height w-full bg-layer-0 p-4" layout="horizontal" :start-ratio="30">
+  <SplitPane class="screen-height w-full bg-layer-0 p-4" layout="horizontal" :start-ratio="30" @click="state.activePanel = null">
     <template #left>
-      <MarkdownRenderer class="p-2 bg-layer-1 h-full rounded" :markdown="state.description"></MarkdownRenderer>
+      <Panel :active="state.activePanel === 'description'" @click.stop="state.activePanel = 'description'" class="h-full">
+        <template #header>
+          <fa-icon :icon="['far', 'lightbulb']"></fa-icon>
+          <span>Description</span>
+        </template>
+        <MarkdownRenderer class="p-2" :markdown="state.description"></MarkdownRenderer>
+      </Panel>
     </template>
     <template #right>
       <SplitPane class="h-full w-full" layout="vertical" :start-ratio="70">
         <template #left>
-          <CodeEditor class="h-full rounded border border-layer-1" mode="js" filename="test" v-model="state.code" />
+          <Panel :active="state.activePanel === 'editor'" @click.stop="state.activePanel = 'editor'" class="h-full">
+            <template #header>
+              <fa-icon :icon="['fas', 'code']"></fa-icon>
+              <span>Editor</span>
+            </template>
+            <CodeEditor class="rounded border border-layer-1" mode="js" filename="test" v-model="state.code" />
+          </Panel>
         </template>
         <template #right>
-          <div class="h-full rounded bg-layer-1 border border-layer-1">
-            <div>{{ state.status }}</div>
-            <div v-html="state.terminal"></div>
-          </div>
+          <Panel :active="state.activePanel === 'terminal'" @click.stop="state.activePanel = 'terminal'" class="h-full">
+            <template #header>
+              <div class="flex flex-row items-center justify-between flex-1">
+                <div class="flex flex-row items-center gap-2">
+                  <fa-icon :icon="['fas', 'terminal']"></fa-icon>
+                  <span>Terminal</span>
+                  <button
+                    class="flex flex-row font-bold items-center gap-2 py-1 px-2 rounded text-green-600 bg-green-400 bg-opacity-10 hover:bg-opacity-30"
+                    @click="actions.run"
+                  >
+                    <div>Run</div>
+                    <fa-icon :icon="['fas', 'play']" />
+                  </button>
+                </div>
+                <div v-if="state.tests">Best result: {{ state.bestScore }}/{{ state.tests.length }}</div>
+              </div>
+            </template>
+            <div v-html="state.terminal" class="h-full overflow-scroll font-mono p-2"></div>
+            <div>
+              <!-- <div>{{ state.status }}</div> -->
+            </div>
+          </Panel>
         </template>
       </SplitPane>
       <!-- <div>Right</div> -->

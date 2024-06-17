@@ -27,6 +27,9 @@
 .nav-height {
   height: var(--nav-height);
 }
+.block-header {
+  @apply p-2 h-9 text-sm font-bold bg-layer-3 flex flex-row items-center gap-2;
+}
 
 .bg-color {
   background-color: var(--bg-color);
