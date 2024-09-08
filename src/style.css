@@ -41,7 +41,35 @@
   --color: rgba(255, 255, 255, 0.87);
   --background-color: #242424;
 }
+.green-text {
+  @apply text-green-600;
+}
+.red-text {
+  @apply text-red-600;
+}
 
+input.input {
+  /* background: var(--background); */
+  border-radius: 8px;
+  height: 40px;
+  padding: 10px 16px;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+input.input:hover,
+input.input:focus {
+  /* background: white; */
+  border-color: rgba(0, 0, 0, 0.14);
+  box-shadow: 0 0 0 3px rgb(22, 163, 74, 0.4);
+}
+input.input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(22, 163, 74, 1);
+}
+.green-button {
+  @apply flex flex-row font-bold items-center justify-center gap-4 py-2 px-4 rounded text-green-600 bg-green-400 bg-opacity-10 hover:bg-opacity-30 text-center;
+}
 /* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

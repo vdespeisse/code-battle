@@ -10,11 +10,14 @@ import {
 } from '@codemirror/view'
 import { Extension, EditorState } from '@codemirror/state'
 import { indentOnInput, bracketMatching, foldGutter, foldKeymap } from '@codemirror/language'
-import { defaultKeymap, history, historyKeymap } from '@codemirror/commands'
+import { defaultKeymap, history, historyKeymap, indentWithTab } from '@codemirror/commands'
 import { searchKeymap, highlightSelectionMatches } from '@codemirror/search'
 import { autocompletion, completionKeymap, closeBrackets, closeBracketsKeymap } from '@codemirror/autocomplete'
 import { lintKeymap } from '@codemirror/lint'
 import { javascript } from '@codemirror/lang-javascript'
+import { markdown } from '@codemirror/lang-markdown'
+import { json } from '@codemirror/lang-json'
+
 import { vsCodeDarkPlus } from './vsTheme'
 
 // (The superfluous function calls around the list of extensions work
@@ -74,8 +77,8 @@ export const baseExtensions: Extension = (() => [
   // highlightActiveLine(),
   drawSelection(),
   highlightSelectionMatches(),
-  javascript(),
   keymap.of([
+    indentWithTab,
     ...closeBracketsKeymap,
     ...defaultKeymap,
     ...searchKeymap,
@@ -85,5 +88,11 @@ export const baseExtensions: Extension = (() => [
     ...lintKeymap,
   ]),
 ])()
+
+export const languages = {
+  javascript,
+  markdown,
+  json,
+}
 
 export { EditorView } from '@codemirror/view'

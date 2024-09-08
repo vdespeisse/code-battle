@@ -73,7 +73,7 @@ onMounted(() => {
           To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
       -->
         <div
-          class="relative text-beige transform overflow-hidden rounded-lg bg-slate-800 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+          class="relative text-beige transform overflow-hidden rounded-lg bg-layer-1 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
         >
           <slot></slot>
         </div>

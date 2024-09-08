@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  active: boolean
+  active?: boolean
 }>()
 </script>
 <template>
@@ -8,7 +8,7 @@ defineProps<{
     <div class="block-header border-x-2 border-t-2" :class="active ? 'border-green-600' : 'border-layer-3'">
       <slot name="header"></slot>
     </div>
-    <div class="panel-content border-x-2 border-b-2 border-layer-1" :class="active ? 'border-green-600' : 'border-layer-1'">
+    <div class="panel-content border-x-2 border-b-2" :class="active ? 'border-green-600' : 'border-layer-1'">
       <slot></slot>
     </div>
   </div>

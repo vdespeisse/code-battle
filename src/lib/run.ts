@@ -2,7 +2,7 @@ import { TestCase } from '../types'
 export function runTests(solution: Function, testCases: TestCase[]) {
   let passed = 0
   for (const { input, output } of testCases) {
-    if (solution(input) === output) {
+    if (solution(...input) === output) {
       passed += 1
     }
   }

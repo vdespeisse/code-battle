@@ -3,14 +3,15 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch, watchEffect } from 'vue'
 import { EditorState } from '@codemirror/state'
-import { EditorView, baseExtensions } from './codemirror'
+import { EditorView, baseExtensions, languages } from './codemirror'
 
 const emit = defineEmits(['update'])
 const value = defineModel<string>()
-
+const props = defineProps<{ mode: 'javascript' | 'markdown' | 'json' }>()
 const el = ref()
+let skip = false
 const extensions = [
   baseExtensions,
   EditorView.updateListener.of(viewUpdate => {
@@ -19,15 +20,27 @@ const extensions = [
     // doc changed
     if (viewUpdate.docChanged) {
       // onChange(viewUpdate.state.doc.toString(), viewUpdate)
+      skip = true
       value.value = viewUpdate.state.doc.toString()
     }
   }),
 ]
-
+let view: EditorView
 onMounted(() => {
+  const lang = languages[props.mode] || languages.javascript
+  extensions.push(lang())
   const state = EditorState.create({ doc: value.value || '', extensions })
-  const view = new EditorView({ state, parent: el.value })
+  view = new EditorView({ state, parent: el.value })
   console.log('Created editor', view)
+})
+watchEffect(() => {
+  if (skip) {
+    skip = false
+    return
+  }
+  console.log('Value changed', value.value)
+  if (!view) return
+  view.setState(EditorState.create({ doc: value.value || '', extensions }))
 })
 </script>
 

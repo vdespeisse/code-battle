@@ -1,18 +1,29 @@
 <script setup lang="ts">
-import useState from '../composables/state'
-const { actions } = useState()
+import { ref, watchEffect } from 'vue'
+import { useCurrentUser, useFirestore } from 'vuefire'
+import { doc, getDoc } from 'firebase/firestore'
+// import useState from '../composables/state'
+const user = useCurrentUser()
+const db = useFirestore()
+const username = ref(' ')
+watchEffect(async () => {
+  if (!user.value) return
+  const userDoc = await getDoc(doc(db, 'users', user.value.uid))
+  username.value = userDoc?.data()?.username
+})
 </script>
 <template>
   <div class="flex flex-row items-center justify-between nav-height p-4">
-    <div>OK</div>
-    <button
-      class="flex flex-row font-bold items-center gap-4 py-2 px-4 rounded text-green-600 bg-green-400 bg-opacity-10 hover:bg-opacity-30"
-      @click="actions.run"
-    >
-      <div>Run</div>
-      <fa-icon :icon="['fas', 'play']" />
-    </button>
-    <div>Settings</div>
+    <div>
+      <slot name="left"></slot>
+    </div>
+    <div>
+      <slot></slot>
+    </div>
+    <div class="flex flex-row items-center gap-2">
+      <div class="font-bold">{{ username }}</div>
+      <fa-icon :icon="['fas', 'gear']"></fa-icon>
+    </div>
   </div>
 </template>
 

@@ -1,23 +1,46 @@
 import type { Component, InjectionKey } from 'vue'
 // import type { Store } from './store'
 
-interface TestCase {
+export interface TestCase {
   input: any
   output: any
 }
 
-export type EditorMode = 'js' | 'css' | 'ssr'
-export interface EditorProps {
-  value: string
-  filename: string
-  readonly?: boolean
-  mode?: EditorMode
+export interface Scenario {
+  id: string
+  name: string
+  description: string
+  tests: string
+  code: string
+  difficulty?: 'easy' | 'medium' | 'hard'
 }
-export interface EditorEmits {
-  (e: 'change', code: string): void
+export interface Room {
+  id: string
+  participants: string[]
+  scenario: string
+  timer: number
+  status: 'setup' | 'running' | 'closed'
+  endCondition: 'first' | 'half' | number
+  startedAt: number
+  winners: Partial<User>[]
 }
-export type EditorComponentType = Component<EditorProps>
+export interface User {
+  id: string
+  username: string
+  roomId: string
+}
+// export type EditorMode = 'js' | 'css' | 'ssr'
+// export interface EditorProps {
+//   value: string
+//   filename: string
+//   readonly?: boolean
+//   mode?: EditorMode
+// }
+// export interface EditorEmits {
+//   (e: 'change', code: string): void
+// }
+// export type EditorComponentType = Component<EditorProps>
 
-export type OutputModes = 'preview' | EditorMode
+// export type OutputModes = 'preview' | EditorMode
 
 // export const injectKeyStore: InjectionKey<Store> = Symbol('store')
